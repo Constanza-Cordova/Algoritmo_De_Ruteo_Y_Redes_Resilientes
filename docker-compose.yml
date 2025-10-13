@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgis/postgis
+    environment:
+      POSTGRES_DB: tu_bd
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: clave
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - .:/app
