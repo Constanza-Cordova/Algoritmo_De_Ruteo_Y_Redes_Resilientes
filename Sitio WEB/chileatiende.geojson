@@ -1,0 +1,69 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6528,
+          -33.4442
+        ]
+      },
+      "properties": {
+        "nombre": "ChileAtiende Sucursal Alameda",
+        "direccion": "Libertador Bernardo O'Higgins 1353, Santiago",
+        "comuna": "Santiago",
+        "horario": "Lunes a Viernes 08:30-14:00",
+        "servicios_disponibles": [
+          "Certificado de nacimiento",
+          "Certificado de antecedentes",
+          "ClaveÚnica",
+          "Bonos y subsidios"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.655,
+          -33.4355
+        ]
+      },
+      "properties": {
+        "nombre": "ChileAtiende Sucursal Santo Domingo",
+        "direccion": "Teatinos 601, Santiago",
+        "comuna": "Santiago",
+        "horario": "Lunes a Viernes 08:30-14:00",
+        "servicios_disponibles": [
+          "Certificados",
+          "Bonos y subsidios",
+          "Orientación"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6705,
+          -33.434
+        ]
+      },
+      "properties": {
+        "nombre": "ChileAtiende Sucursal Santiago",
+        "direccion": "San Pablo 2471, Santiago",
+        "comuna": "Santiago",
+        "horario": "Lunes a Viernes 08:30-14:00",
+        "servicios_disponibles": [
+          "Certificados",
+          "Orientación",
+          "ClaveÚnica"
+        ]
+      }
+    }
+  ]
+}

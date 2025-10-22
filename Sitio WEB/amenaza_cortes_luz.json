@@ -1,0 +1,111 @@
+[
+  {
+    "id": 101,
+    "tipo": "corte_programado",
+    "comuna": "Santiago",
+    "sector": "Barrio Brasil - Concha y Toro",
+    "causa": "Mantención preventiva de red eléctrica",
+    "lat": -33.4508,
+    "lon": -70.6587,
+    "radio_afectacion_m": 300,
+    "inicio": "2025-10-20T05:30:20.638922",
+    "fin": "2025-10-20T08:30:20.638922",
+    "duracion_estimada_min": 180,
+    "clientes_afectados": 1200,
+    "calles_afectadas": [
+      "Concha y Toro",
+      "Huérfanos",
+      "Compañía"
+    ],
+    "empresa": "Enel Distribución Chile",
+    "aviso_previo": true,
+    "fuente": "enel_api"
+  },
+  {
+    "id": 102,
+    "tipo": "corte_no_programado",
+    "comuna": "Santiago",
+    "sector": "San Diego - Av. Matta",
+    "causa": "Falla en transformador",
+    "lat": -33.4547,
+    "lon": -70.6471,
+    "radio_afectacion_m": 250,
+    "inicio": "2025-10-20T03:00:20.638922",
+    "fin": "2025-10-20T05:30:20.638922",
+    "duracion_estimada_min": 150,
+    "clientes_afectados": 850,
+    "calles_afectadas": [
+      "San Diego",
+      "Av. Matta",
+      "Santa Rosa"
+    ],
+    "empresa": "Enel Distribución Chile",
+    "aviso_previo": false,
+    "fuente": "enel_api"
+  },
+  {
+    "id": 103,
+    "tipo": "corte_programado",
+    "comuna": "Santiago",
+    "sector": "Barrio Cívico - Teatinos",
+    "causa": "Renovación de postación",
+    "lat": -33.4417,
+    "lon": -70.6548,
+    "radio_afectacion_m": 200,
+    "inicio": "2025-10-20T04:30:20.638922",
+    "fin": "2025-10-20T06:00:20.638922",
+    "duracion_estimada_min": 90,
+    "clientes_afectados": 500,
+    "calles_afectadas": [
+      "Teatinos",
+      "Morandé",
+      "Bandera"
+    ],
+    "empresa": "Enel Distribución Chile",
+    "aviso_previo": true,
+    "fuente": "enel_api"
+  },
+  {
+    "id": 104,
+    "tipo": "corte_no_programado",
+    "comuna": "Santiago",
+    "sector": "Santa Lucía - Parque Forestal",
+    "causa": "Daño en cables por condiciones climáticas",
+    "lat": -33.4388,
+    "lon": -70.6412,
+    "radio_afectacion_m": 350,
+    "inicio": "2025-10-20T02:30:20.638922",
+    "fin": "2025-10-20T06:30:20.638922",
+    "duracion_estimada_min": 240,
+    "clientes_afectados": 1500,
+    "calles_afectadas": [
+      "José Victorino Lastarria",
+      "Merced",
+      "Parque Forestal"
+    ],
+    "empresa": "Enel Distribución Chile",
+    "aviso_previo": false,
+    "fuente": "enel_api"
+  },
+  {
+    "id": 105,
+    "tipo": "corte_programado",
+    "comuna": "Santiago",
+    "sector": "Alameda - Universidad de Chile",
+    "causa": "Instalación de nuevo equipamiento",
+    "lat": -33.4455,
+    "lon": -70.652,
+    "radio_afectacion_m": 180,
+    "inicio": "2025-10-20T07:30:20.638922",
+    "fin": "2025-10-20T09:00:20.638922",
+    "duracion_estimada_min": 90,
+    "clientes_afectados": 600,
+    "calles_afectadas": [
+      "Alameda",
+      "Mac Iver"
+    ],
+    "empresa": "Enel Distribución Chile",
+    "aviso_previo": true,
+    "fuente": "enel_api"
+  }
+]

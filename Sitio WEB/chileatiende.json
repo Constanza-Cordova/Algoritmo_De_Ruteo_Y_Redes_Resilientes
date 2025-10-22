@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "ChileAtiende Sucursal Alameda",
+    "direccion": "Libertador Bernardo O'Higgins 1353, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.4442,
+    "lon": -70.6528,
+    "horario": "Lunes a Viernes 08:30-14:00",
+    "servicios_disponibles": [
+      "Certificado de nacimiento",
+      "Certificado de antecedentes",
+      "ClaveÚnica",
+      "Bonos y subsidios"
+    ]
+  },
+  {
+    "nombre": "ChileAtiende Sucursal Santo Domingo",
+    "direccion": "Teatinos 601, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.4355,
+    "lon": -70.655,
+    "horario": "Lunes a Viernes 08:30-14:00",
+    "servicios_disponibles": [
+      "Certificados",
+      "Bonos y subsidios",
+      "Orientación"
+    ]
+  },
+  {
+    "nombre": "ChileAtiende Sucursal Santiago",
+    "direccion": "San Pablo 2471, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.434,
+    "lon": -70.6705,
+    "horario": "Lunes a Viernes 08:30-14:00",
+    "servicios_disponibles": [
+      "Certificados",
+      "Orientación",
+      "ClaveÚnica"
+    ]
+  }
+]

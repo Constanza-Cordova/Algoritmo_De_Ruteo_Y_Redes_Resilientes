@@ -1,0 +1,103 @@
+[
+  {
+    "nombre": "Notaría 49 (Wladimir Schramm López)",
+    "notario_titular": "Wladimir Alejandro Schramm López",
+    "direccion": "Amunategui 73, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.4372,
+    "lon": -70.6568,
+    "telefono": "+56 2 2889 3900",
+    "email": "notario@49notaria.cl",
+    "horario_semana": "Lunes a Viernes 09:00-14:00 y 15:00-17:30",
+    "horario_sabado": "Cerrado",
+    "es_turno_sabado": false,
+    "url": "https://www.49notaria.cl/",
+    "servicios": [
+      "Escrituras Públicas (Compraventas, Sociedades)",
+      "Documentos Privados (Contratos Arriendo, Promesas)",
+      "Certificaciones (Firmas, Fotocopias)",
+      "Protestos",
+      "Declaraciones Juradas"
+    ]
+  },
+  {
+    "nombre": "Notaría 43 (Juan Ricardo San Martin)",
+    "notario_titular": "Juan Ricardo San Martin Urrejola",
+    "direccion": "Huérfanos 835, Piso 18, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.4385,
+    "lon": -70.6508,
+    "telefono": "+56 2 2898 5900",
+    "email": "contacto@notariasanmartin.cl",
+    "horario_semana": "Lunes a Viernes 09:00-13:00 y 15:00-17:00",
+    "horario_sabado": "Cerrado",
+    "es_turno_sabado": false,
+    "url": "https://www.notariasanmartin.cl/",
+    "servicios": [
+      "Compraventa Inmuebles",
+      "Constitución y Modificación Sociedades",
+      "Poderes Generales y Especiales",
+      "Testamentos",
+      "Finiquitos"
+    ]
+  },
+  {
+    "nombre": "Notaría 41 (Félix Jara Cadot)",
+    "notario_titular": "Félix Jara Cadot",
+    "direccion": "Huérfanos 1160, Subterráneo, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.439,
+    "lon": -70.65,
+    "telefono": "+56 2 2674 4600",
+    "email": "info@notariafjc.cl",
+    "horario_semana": "Lunes a Viernes 09:30-14:00 y 15:00-17:00",
+    "horario_sabado": "Cerrado",
+    "es_turno_sabado": false,
+    "url": "https://notariafjc.cl/",
+    "servicios": [
+      "Escrituras Públicas",
+      "Autorizaciones de Viaje",
+      "Contratos de Trabajo",
+      "Legalizaciones"
+    ]
+  },
+  {
+    "nombre": "Notaría 25 (Zaida Sepúlveda - Turno Sáb)",
+    "notario_titular": "Zaida Angélica Sepúlveda Rivera (Interino)",
+    "direccion": "Amunátegui 361, local 6, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.438,
+    "lon": -70.6565,
+    "telefono": "+56 2 3339 1410",
+    "email": "contacto@notaria25.cl",
+    "horario_semana": "Lunes a Viernes 8:30-17:30",
+    "horario_sabado": "09:00-12:00",
+    "es_turno_sabado": true,
+    "servicios": [
+      "Trámites Vehiculares (Transferencias)",
+      "Salvoconductos",
+      "Declaraciones Juradas Renta",
+      "Certificados varios"
+    ]
+  },
+  {
+    "nombre": "Notaría 30 (Octavio Gutiérrez López)",
+    "notario_titular": "Octavio Gutiérrez López",
+    "direccion": "Av Libertador Bernardo O'Higgins 980, Of 134-135, Santiago",
+    "comuna": "Santiago",
+    "lat": -33.443,
+    "lon": -70.651,
+    "telefono": "+56 2 2639 2289",
+    "email": "contacto@30notaria.cl",
+    "horario_semana": "Lunes a Jueves 8:00-13:30 y 14:30-16:00, Viernes 8:00-14:00",
+    "horario_sabado": "Cerrado",
+    "es_turno_sabado": false,
+    "url": "http://www.30notaria.cl/",
+    "servicios": [
+      "Escrituras",
+      "Contratos",
+      "Poderes",
+      "Actas"
+    ]
+  }
+]

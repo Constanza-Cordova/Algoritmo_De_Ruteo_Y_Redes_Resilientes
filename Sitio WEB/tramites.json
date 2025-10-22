@@ -1,0 +1,77 @@
+[
+  {
+    "id_tramite": "T-01",
+    "nombre": "Compraventa de Inmueble",
+    "fuente": "ChileAtiende / Notarios",
+    "pasos": [
+      {
+        "orden": 1,
+        "tipo_oficina": "notaria",
+        "descripcion": "Firma de escritura de compraventa",
+        "requisitos": [
+          "Cédula de identidad",
+          "Borrador escritura",
+          "Certificados del inmueble"
+        ]
+      },
+      {
+        "orden": 2,
+        "tipo_oficina": "conservador",
+        "descripcion": "Inscripción en Conservador de Bienes Raíces",
+        "requisitos": [
+          "Copia autorizada de escritura"
+        ]
+      },
+      {
+        "orden": 3,
+        "tipo_oficina": "sii",
+        "descripcion": "Declaración y pago de impuesto a la transferencia",
+        "requisitos": [
+          "Escritura inscrita",
+          "Formulario 2890"
+        ]
+      }
+    ]
+  },
+  {
+    "id_tramite": "T-02",
+    "nombre": "Transferencia de vehículo usado",
+    "fuente": "ChileAtiende Ficha 3449",
+    "pasos": [
+      {
+        "orden": 1,
+        "tipo_oficina": "registro_civil",
+        "descripcion": "Declaración consensual de transferencia",
+        "requisitos": [
+          "Cédula de identidad (comprador y vendedor)",
+          "Permiso de circulación",
+          "Certificado de revisión técnica"
+        ]
+      }
+    ]
+  },
+  {
+    "id_tramite": "T-03",
+    "nombre": "Constitución de Sociedad (en un día)",
+    "fuente": "ChileAtiende Ficha 30419",
+    "pasos": [
+      {
+        "orden": 1,
+        "tipo_oficina": "notaria",
+        "descripcion": "Firma electrónica de socios",
+        "requisitos": [
+          "ClaveÚnica de socios",
+          "Borrador de estatutos"
+        ]
+      },
+      {
+        "orden": 2,
+        "tipo_oficina": "sii",
+        "descripcion": "Obtención de RUT e Inicio de Actividades",
+        "requisitos": [
+          "Formulario de constitución firmado"
+        ]
+      }
+    ]
+  }
+]

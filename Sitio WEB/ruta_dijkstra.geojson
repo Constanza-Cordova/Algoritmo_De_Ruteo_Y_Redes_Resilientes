@@ -1,0 +1,155 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -70.6545,
+            -33.442
+          ],
+          [
+            -70.654,
+            -33.438
+          ]
+        ]
+      },
+      "properties": {
+        "tipo": "ruta_fallback",
+        "segmento": 1,
+        "origen": "Primera Notaría de Santiago",
+        "destino": "Conservador de Bienes Raíces Santiago",
+        "distancia_m": 447.2,
+        "nota": "Línea recta visual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -70.6526506,
+            -33.4375028
+          ],
+          [
+            -70.6527672,
+            -33.4375159
+          ],
+          [
+            -70.6527995,
+            -33.4375196
+          ],
+          [
+            -70.6531191,
+            -33.4375556
+          ],
+          [
+            -70.653431,
+            -33.4375907
+          ],
+          [
+            -70.6535301,
+            -33.4376018
+          ],
+          [
+            -70.6540226,
+            -33.4376573
+          ]
+        ]
+      },
+      "properties": {
+        "tipo": "ruta_calculada",
+        "segmento": 2,
+        "origen": "Conservador de Bienes Raíces Santiago",
+        "destino": "SII Santiago Centro",
+        "calle": "Catedral",
+        "tipo_via": "secondary",
+        "distancia_m": 154.1,
+        "secuencia": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6545,
+          -33.442
+        ]
+      },
+      "properties": {
+        "tipo": "parada",
+        "numero": 1,
+        "nombre": "Primera Notaría de Santiago",
+        "direccion": "Moneda 975",
+        "tipo_oficina": "notaria",
+        "tiempo_tramite": 60,
+        "documentos": [
+          "..."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.654,
+          -33.438
+        ]
+      },
+      "properties": {
+        "tipo": "parada",
+        "numero": 2,
+        "nombre": "Conservador de Bienes Raíces Santiago",
+        "direccion": "Morandé 440",
+        "tipo_oficina": "conservador",
+        "tiempo_tramite": 90,
+        "documentos": [
+          "..."
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.653,
+          -33.437
+        ]
+      },
+      "properties": {
+        "tipo": "parada",
+        "numero": 3,
+        "nombre": "SII Santiago Centro",
+        "direccion": "Teatinos 120",
+        "tipo_oficina": "sii",
+        "tiempo_tramite": 45,
+        "documentos": [
+          "..."
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "tipo": "ruta_tramite_compraventa",
+    "algoritmo": "pgr_dijkstra (con fallback 2.5x)",
+    "descripcion": "Ruta para trámite de compraventa (puede ser línea recta)",
+    "tramite": {
+      "nombre": "Compraventa de Inmueble",
+      "pasos": 3,
+      "oficinas": [
+        "Notaría",
+        "Conservador BR",
+        "SII"
+      ],
+      "duracion_estimada_min": 202,
+      "distancia_total_km": 0.6
+    },
+    "nota": "Tiempos estimados."
+  }
+}

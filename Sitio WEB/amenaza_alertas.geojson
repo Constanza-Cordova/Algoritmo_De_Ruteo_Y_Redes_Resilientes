@@ -1,0 +1,211 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6341,
+          -33.4378
+        ]
+      },
+      "properties": {
+        "id": 1,
+        "tipo": "manifestacion",
+        "severidad": 4,
+        "titulo": "Manifestación en Plaza Baquedano",
+        "descripcion": "Concentración con marchas intermitentes hacia La Moneda",
+        "radio_afectacion_m": 500,
+        "inicio": "2025-10-20T01:30:20.632413",
+        "fin": "2025-10-20T06:30:20.632413",
+        "fuente": "carabineros_chile",
+        "calles_afectadas": [
+          "Av. Libertador Bernardo O'Higgins",
+          "Vicuña Mackenna"
+        ],
+        "recomendacion": "Evitar sector, usar vías alternativas"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6368,
+          -33.4526
+        ]
+      },
+      "properties": {
+        "id": 2,
+        "tipo": "corte_calle",
+        "severidad": 3,
+        "titulo": "Corte de tránsito San Diego",
+        "descripcion": "Intervención de calzada por trabajos de emergencia",
+        "radio_afectacion_m": 300,
+        "inicio": "2025-10-20T02:45:20.632413",
+        "fin": "2025-10-20T07:30:20.632413",
+        "fuente": "aguas_andinas",
+        "calles_afectadas": [
+          "San Diego",
+          "Av. Matta"
+        ],
+        "recomendacion": "Desvío por Santa Rosa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.645,
+          -33.445
+        ]
+      },
+      "properties": {
+        "id": 3,
+        "tipo": "manifestacion",
+        "severidad": 2,
+        "titulo": "Actividad sindical Alameda",
+        "descripcion": "Grupo con pancartas, tránsito lento pero fluido",
+        "radio_afectacion_m": 200,
+        "inicio": "2025-10-20T03:00:20.632413",
+        "fin": "2025-10-20T05:30:20.632413",
+        "fuente": "carabineros_chile",
+        "calles_afectadas": [
+          "Av. Libertador Bernardo O'Higgins"
+        ],
+        "recomendacion": "Considerar 15-20 min de retraso"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6498,
+          -33.4473
+        ]
+      },
+      "properties": {
+        "id": 4,
+        "tipo": "accidente",
+        "severidad": 3,
+        "titulo": "Accidente de tránsito Nataniel Cox",
+        "descripcion": "Colisión entre vehículos, una pista bloqueada",
+        "radio_afectacion_m": 250,
+        "inicio": "2025-10-20T03:10:20.632413",
+        "fin": "2025-10-20T04:30:20.632413",
+        "fuente": "carabineros_chile",
+        "calles_afectadas": [
+          "Nataniel Cox",
+          "Alameda"
+        ],
+        "recomendacion": "Tránsito por pista izquierda únicamente"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6418,
+          -33.4399
+        ]
+      },
+      "properties": {
+        "id": 5,
+        "tipo": "aglomeracion",
+        "severidad": 2,
+        "titulo": "Alta afluencia Barrio Lastarria",
+        "descripcion": "Evento cultural, alta concentración peatonal",
+        "radio_afectacion_m": 150,
+        "inicio": "2025-10-20T03:15:20.632413",
+        "fin": "2025-10-20T08:30:20.632413",
+        "fuente": "municipalidad_santiago",
+        "calles_afectadas": [
+          "José Victorino Lastarria",
+          "Rosal"
+        ],
+        "recomendacion": "Velocidad reducida, prioridad peatonal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6505,
+          -33.437
+        ]
+      },
+      "properties": {
+        "id": 6,
+        "tipo": "manifestacion",
+        "severidad": 3,
+        "titulo": "Concentración Plaza de Armas",
+        "descripcion": "Actividad pacífica con presencia policial",
+        "radio_afectacion_m": 400,
+        "inicio": "2025-10-20T03:20:20.632413",
+        "fin": "2025-10-20T06:30:20.632413",
+        "fuente": "carabineros_chile",
+        "calles_afectadas": [
+          "Puente",
+          "Compañía",
+          "21 de Mayo"
+        ],
+        "recomendacion": "Evitar circulación por el centro de la plaza"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.656,
+          -33.442
+        ]
+      },
+      "properties": {
+        "id": 7,
+        "tipo": "corte_calle",
+        "severidad": 4,
+        "titulo": "Cierre Bandera por evento",
+        "descripcion": "Calle completamente cerrada por evento oficial",
+        "radio_afectacion_m": 200,
+        "inicio": "2025-10-20T02:30:20.632413",
+        "fin": "2025-10-20T05:30:20.632413",
+        "fuente": "ministerio_interior",
+        "calles_afectadas": [
+          "Bandera"
+        ],
+        "recomendacion": "Usar Morandé o Teatinos como alternativa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.649,
+          -33.4555
+        ]
+      },
+      "properties": {
+        "id": 8,
+        "tipo": "trabajos",
+        "severidad": 2,
+        "titulo": "Mantención Av. Matta",
+        "descripcion": "Trabajos de pavimentación, una pista habilitada",
+        "radio_afectacion_m": 300,
+        "inicio": "2025-10-20T00:30:20.632413",
+        "fin": "2025-10-20T09:30:20.632413",
+        "fuente": "serviu",
+        "calles_afectadas": [
+          "Av. Matta"
+        ],
+        "recomendacion": "Transitar con precaución, velocidad reducida"
+      }
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.65,
+          -33.4458
+        ]
+      },
+      "properties": {
+        "nombre": "SII Dirección Regional Santiago Centro I",
+        "codigo_oficina": "3048-7",
+        "tipo_oficina": "Dirección Regional",
+        "direccion": "Alonso Ovalle 680, Santiago",
+        "comuna": "Santiago",
+        "telefono": "+56 2 2395 XXXX",
+        "horario": "Lunes a Viernes 09:00-14:00",
+        "servicios_presenciales": [
+          {
+            "codigo": "F4415",
+            "nombre": "Inicio de actividades persona natural"
+          },
+          {
+            "codigo": "F4416",
+            "nombre": "Inicio de actividades persona jurídica"
+          },
+          {
+            "codigo": "F2117",
+            "nombre": "Modificaciones y actualización de información"
+          },
+          {
+            "codigo": "F3239",
+            "nombre": "Término de giro"
+          },
+          {
+            "codigo": "BR001",
+            "nombre": "Trámites de Bienes Raíces (Avalúos, Certificados)"
+          },
+          {
+            "codigo": "TIM01",
+            "nombre": "Timbraje de Documentos (en Santa Rosa 108)"
+          },
+          {
+            "codigo": "CONS01",
+            "nombre": "Consultas Generales Tributarias"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6535,
+          -33.439
+        ]
+      },
+      "properties": {
+        "nombre": "SII Oficina de Partes",
+        "codigo_oficina": "N/A",
+        "tipo_oficina": "Oficina de Partes",
+        "direccion": "Teatinos 120, Santiago",
+        "comuna": "Santiago",
+        "telefono": "+56 2 2395 XXXX",
+        "horario": "Lunes a Viernes 9:00-14:00",
+        "servicios_presenciales": [
+          {
+            "codigo": "DOC01",
+            "nombre": "Recepción de documentos y solicitudes"
+          },
+          {
+            "codigo": "DOC02",
+            "nombre": "Entrega de notificaciones"
+          },
+          {
+            "codigo": "DOC03",
+            "nombre": "Consultas estado de trámites"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6558,
+          -33.4375
+        ]
+      },
+      "properties": {
+        "nombre": "SII Atención Grandes Contribuyentes",
+        "codigo_oficina": "GC-RM",
+        "tipo_oficina": "Dirección Grandes Contribuyentes",
+        "direccion": "Amunátegui 66, Santiago",
+        "comuna": "Santiago",
+        "telefono": "+56 2 2395 1000",
+        "horario": "Lunes a Viernes 09:00-14:00",
+        "servicios_presenciales": [
+          {
+            "codigo": "GC001",
+            "nombre": "Atención exclusiva Grandes Contribuyentes"
+          },
+          {
+            "codigo": "GC002",
+            "nombre": "Fiscalización Grandes Contribuyentes"
+          },
+          {
+            "codigo": "GC003",
+            "nombre": "Consultas especializadas GC"
+          }
+        ]
+      }
+    }
+  ]
+}
