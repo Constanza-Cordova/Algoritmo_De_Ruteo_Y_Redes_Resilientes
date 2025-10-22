@@ -1,17 +1,50 @@
-version: '3'
+version: "3.9"
+
 services:
   db:
-    image: postgis/postgis
+    image: pgrouting/pgrouting:latest
+    container_name: rr_db
     environment:
-      POSTGRES_DB: tu_bd
-      POSTGRES_USER: usuario
-      POSTGRES_PASSWORD: clave
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ruteo_resiliente
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ruteo_resiliente || exit 1"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
 
-  app:
-    build: .
+  etl:
+    build: ./etl
+    container_name: rr_etl
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    environment:
+      PGHOST: db
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: ruteo_resiliente
+      PGPORT: 5432
+      WEB_DATA_DIR: /webdata
+      OUT_DIR: /app/out
     volumes:
-      - .:/app
+      - ./web/data:/webdata
+
+  web:
+    build: ./web
+    container_name: rr_web
+    depends_on:
+      - etl
+    ports:
+      - "8087:80"
+    volumes:
+      - ./web/data:/usr/share/nginx/html/data:ro
+
+volumes:
+  pgdata:
