@@ -1,12 +1,385 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
-  <title>Mapa ETL</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ruteo Resiliente — Optimización de Trámites Públicos</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#121a34; --text:#e9eefb; --muted:#8ea3c7;
+      --not: #2563eb;  /* notarías */
+      --inf: #10b981;  /* infraestructura */
+      --sii: #a855f7;  /* SII */
+      --alr: #ef4444;  /* alertas */
+      --cut: #fb7185;  /* cortes luz */
+      --route: #ff0000; /* ruta (ROJO BRILLANTE PARA DEBUG) */
+    }
+    
+    /* ... (Mismos estilos CSS que tenías antes) ... */
+    * { box-sizing: border-box; }
+    html,body { height:100%; margin:0; background:var(--bg); color:var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    #map { position:absolute; inset:64px 0 0 0; }
+    header { position:fixed; top:0; left:0; right:0; height:64px; display:flex; align-items:center; gap:16px; padding:8px 16px; background:linear-gradient(180deg, rgba(9,13,26,.95), rgba(9,13,26,.7)); backdrop-filter: blur(4px); z-index:1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+    .title { font-weight:700; font-size: 1.1rem; }
+    .subtitle { color:var(--muted); font-size:.88rem }
+    .panel { position:fixed; top:68px; left:12px; width:360px; max-height:75vh; overflow:auto; padding:14px 16px; border-radius:12px; background:var(--panel); box-shadow:0 10px 30px rgba(0,0,0,.35); z-index:1001; font-size:.95rem; border: 1px solid rgba(255,255,255,0.1); }
+    .panel h3 { font-size: 1rem; margin: 12px 0 8px; color: var(--text); opacity: 0.9; }
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:8px 0; }
+    .row label{ display:flex; align-items:center; gap:10px; cursor:pointer }
+    .row label:hover { opacity: 0.8; }
+    .pill{ width:14px; height:14px; border-radius:3px; display:inline-block; box-shadow: 0 0 4px rgba(0,0,0,0.3); }
+    .pill.route{ background:var(--route); }
+    .pill.not{ background:var(--not); }
+    .pill.inf{ background:var(--inf); }
+    .pill.sii{ background:var(--sii); }
+    .pill.alr{ background:var(--alr); }
+    .pill.cut{ background:var(--cut); }
+    input[type="checkbox"] { cursor: pointer; }
+    .hint{ color:var(--muted); font-size:.88rem; margin-top:12px; padding: 8px; background: rgba(255,255,255,0.05); border-radius: 6px; }
+    a, a:visited{ color:#8ab4ff; text-decoration: none; font-size: 0.85rem; }
+    a:hover { text-decoration: underline; }
+    hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 12px 0; }
+    .stats { margin-top: 16px; padding: 12px; background: rgba(255,255,255,0.03); border-radius: 8px; font-size: 0.88rem; }
+    .stats div { margin: 4px 0; display: flex; justify-content: space-between; }
+    .stats .label { color: var(--muted); }
+    .stats .value { color: var(--text); font-weight: 500; }
+    .footer { position:fixed; right:10px; bottom:8px; z-index:1002; color:var(--muted); font-size:.85rem; background:rgba(0,0,0,.5); padding:6px 10px; border-radius:8px; }
+    .leaflet-popup-content-wrapper { background: var(--panel); color: var(--text); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
+    .leaflet-popup-content { margin: 12px 16px; min-width: 250px; max-width: 350px; }
+    .leaflet-popup-tip { background: var(--panel); border-color: rgba(255,255,255,0.1); }
+    .popup-header { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px; }
+    .popup-tipo { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--text); opacity: 0.8; }
+    .popup-section { margin: 8px 0; }
+    .popup-label { font-size: 0.85rem; color: var(--muted); margin-bottom: 2px; }
+    .popup-value { font-size: 0.95rem; color: var(--text); }
+    .popup-list { font-size: 0.88rem; margin: 4px 0; padding-left: 20px; }
+    .popup-list li { margin: 2px 0; }
+    .popup-horario { display: inline-block; padding: 4px 8px; background: rgba(16, 185, 129, 0.2); border-radius: 4px; font-size: 0.88rem; margin-top: 4px; }
+    .popup-alerta { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 8px; margin-top: 8px; font-size: 0.88rem; }
+    .badge-turno { background: var(--not); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+
+  </style>
 </head>
+
 <body>
-  <div id="map" style="height: 600px;"></div>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="mapa.js"></script>
+  <header>
+    <div class="title">🏛️ Sistema de Ruteo Resiliente — Santiago Centro</div>
+    <div class="subtitle">Optimización de trámites públicos con pgr_dijkstra</div>
+  </header>
+
+  <div class="panel">
+    <h3>🗺️ Capas del Sistema</h3>
+    
+    <div class="row">
+      <label><span class="pill route"></span>
+        <input type="checkbox" class="layer-toggle" data-file="ruta_dijkstra.geojson" checked>
+        <strong>Ruta Óptima (Dijkstra)</strong>
+      </label>
+    </div>
+    <div class="hint">
+      📍 Trámite: Compraventa de Inmueble<br>
+      Notaría → Conservador BR → SII
+    </div>
+
+    <hr>
+    <h3>📊 Metadata (2 fuentes)</h3>
+
+    <div class="row">
+      <label><span class="pill not"></span>
+        <input type="checkbox" class="layer-toggle" data-file="notarios.geojson" data-fallback="notarios.json" checked>
+        <strong>Notarías</strong>
+      </label>
+      <a href="/data/notarios.json" target="_blank">NotariosChile.cl</a>
+    </div>
+
+    <div class="row">
+      <label><span class="pill sii"></span>
+        <input type="checkbox" class="layer-toggle" data-file="sii.geojson" data-fallback="sii.json" checked>
+        <strong>SII</strong>
+      </label>
+      <a href="/data/sii.json" target="_blank">Directorio SII</a>
+    </div>
+
+    <hr>
+    <h3>⚠️ Amenazas Activas</h3>
+
+    <div class="row">
+      <label><span class="pill alr"></span>
+        <input type="checkbox" class="layer-toggle" data-file="amenaza_alertas.geojson" checked>
+        <strong>Alertas de Tráfico</strong>
+      </label>
+      <a href="/data/amenaza_alertas.json" target="_blank">Ver datos</a>
+    </div>
+
+    <div class="row">
+      <label><span class="pill cut"></span>
+        <input type="checkbox" class="layer-toggle" data-file="amenaza_cortes_luz.geojson" checked>
+        <strong>Cortes de Luz</strong>
+      </label>
+      <a href="/data/amenaza_cortes_luz.json" target="_blank">Ver datos</a>
+    </div>
+
+    <hr>
+    <h3>🛣️ Infraestructura</h3>
+
+    <div class="row">
+      <label><span class="pill inf"></span>
+        <input type="checkbox" class="layer-toggle" data-file="infraestructura.geojson">
+        Red vial (OSM)
+      </label>
+      <a href="/data/infraestructura.geojson" target="_blank">GeoJSON</a>
+    </div>
+
+    <div class="stats" id="stats">
+      <div><span class="label">Estado:</span> <span class="value">Cargando...</span></div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="footer">
+    🎓 Fase 2 - Ruteo Resiliente | © OpenStreetMap & Leaflet
+  </div>
+
+  <script>
+    // Mapa base con estilo oscuro
+    const map = L.map('map', {
+      center: [-33.442, -70.654],
+      zoom: 15,
+      zoomControl: true
+    });
+
+    // Capa base oscura
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap © CartoDB'
+    }).addTo(map);
+
+    // Contenedor de capas activas
+    const activeLayers = new Map();
+    let statsData = {
+      oficinas: 0,
+      amenazas: 0,
+      rutaKm: 0
+    };
+
+    // Iconos personalizados
+    const icons = {
+      notaria: L.divIcon({ html: '<div style="background:#2563eb;width:20px;height:20px;border-radius:50%;border:2px solid white;"></div>', iconSize: [20, 20], className: '' }),
+      sii: L.divIcon({ html: '<div style="background:#a855f7;width:20px;height:20px;border-radius:50%;border:2px solid white;"></div>', iconSize: [20, 20], className: '' }),
+      alerta: L.divIcon({ html: '<div style="background:#ef4444;width:24px;height:24px;border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">!</div>', iconSize: [24, 24], className: '' }),
+      corte: L.divIcon({ html: '<div style="background:#fb7185;width:24px;height:24px;border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center;">⚡</div>', iconSize: [24, 24], className: '' })
+    };
+
+    // Estilo para líneas
+    function styleFn(file){
+      if (file === 'ruta_dijkstra.geojson') {
+        return { color: 'var(--route)', weight: 7, opacity: 1 }; // Rojo brillante
+      }
+      const c = colorFor(file);
+      return { color: c, weight: 2, opacity: 0.8, fillColor: c, fillOpacity: 0.3 };
+    }
+    
+    // --- *** INICIO DEL CAMBIO *** ---
+    // Crear popup HTML según tipo de oficina (¡AHORA MUESTRA SERVICIOS!)
+    function crearPopupOficina(props) {
+      let html = `<div class="popup-header">${escapeHtml(props.nombre || 'Sin nombre')}`;
+      
+      // Badge de turno para notarías
+      if (props.es_turno_sabado) {
+        html += ` <span class="badge-turno">TURNO SÁBADO</span>`;
+      }
+      html += `</div>`;
+      
+      // Dirección
+      if (props.direccion) {
+        html += `<div class="popup-section">
+          <div class="popup-label">📍 Dirección</div>
+          <div class="popup-value">${escapeHtml(props.direccion)}</div>
+        </div>`;
+      }
+      
+      // Horario (combinando semana y sábado si existe)
+      let horarioTexto = props.horario || props.horario_semana || '';
+      if (props.horario_sabado && props.horario_sabado !== 'Cerrado') {
+          horarioTexto += `<br>Sábado: ${props.horario_sabado}`;
+      }
+      if (horarioTexto) {
+         html += `<div class="popup-section">
+          <div class="popup-label">🕐 Horario</div>
+          <div class="popup-horario">${horarioTexto}</div> 
+          </div>`; // Usamos innerHTML aquí, así que el <br> funciona
+      }
+      
+      // Teléfono
+      if (props.telefono) {
+        html += `<div class="popup-section">
+          <div class="popup-label">📞 Contacto</div>
+          <div class="popup-value">${escapeHtml(props.telefono)}</div>
+        </div>`;
+      }
+      
+      // Servicios (para Notarías)
+      if (props.servicios && Array.isArray(props.servicios) && props.servicios.length > 0) {
+        html += `<div class="popup-section">
+          <div class="popup-label">📋 Servicios Principales (Notaría)</div>
+          <ul class="popup-list">`;
+        props.servicios.slice(0, 4).forEach(s => { // Mostrar hasta 4
+          html += `<li>${escapeHtml(s)}</li>`;
+        });
+        if (props.servicios.length > 4) {
+             html += `<li>... y ${props.servicios.length - 4} más</li>`;
+        }
+        html += `</ul></div>`;
+      }
+      
+      // Servicios Presenciales (para SII)
+      if (props.servicios_presenciales && Array.isArray(props.servicios_presenciales) && props.servicios_presenciales.length > 0) {
+        html += `<div class="popup-section">
+          <div class="popup-label">💼 Trámites Principales (SII)</div>
+          <ul class="popup-list">`;
+        props.servicios_presenciales.slice(0, 4).forEach(s => { // Mostrar hasta 4
+          html += `<li>${escapeHtml(s.nombre)} ${s.codigo ? `(${s.codigo})` : ''}</li>`;
+        });
+         if (props.servicios_presenciales.length > 4) {
+             html += `<li>... y ${props.servicios_presenciales.length - 4} más</li>`;
+        }
+        html += `</ul></div>`;
+      }
+      
+      return html;
+    }
+    // --- *** FIN DEL CAMBIO *** ---
+    
+    // ... (El resto de las funciones JavaScript son IDÉNTICAS a las que ya tenías) ...
+    function colorFor(file){
+      if (file.includes('notario')) return '#2563eb';
+      if (file.includes('infra'))   return '#10b981';
+      if (file.includes('sii'))     return '#a855f7';
+      if (file.includes('alerta'))  return '#ef4444';
+      if (file.includes('corte'))   return '#fb7185';
+      return '#3388ff';
+    }
+    function pointToLayerFactory(file){
+      return (feature, latlng) => {
+        let icon = null;
+        if (file.includes('notario')) { icon = icons.notaria; } 
+        else if (file.includes('sii')) { icon = icons.sii; } 
+        else if (file.includes('alerta')) { icon = icons.alerta; } 
+        else if (file.includes('corte')) { icon = icons.corte; }
+        return L.marker(latlng, { icon: icon || L.Icon.Default });
+      };
+    }
+    function crearPopupAmenaza(props) {
+      let html = `<div class="popup-header">⚠️ ${escapeHtml(props.titulo || props.tipo || 'Alerta')}<span class="popup-tipo">Severidad: ${props.severidad || 3}/5</span></div>`;
+      if (props.descripcion) { html += `<div class="popup-section"><div class="popup-value">${escapeHtml(props.descripcion)}</div></div>`; }
+      if (props.calles_afectadas && Array.isArray(props.calles_afectadas)) {
+        html += `<div class="popup-section"><div class="popup-label">🛣️ Calles afectadas</div><ul class="popup-list">`;
+        props.calles_afectadas.forEach(c => { html += `<li>${escapeHtml(c)}</li>`; });
+        html += `</ul></div>`;
+      }
+      if (props.recomendacion) { html += `<div class="popup-alerta">💡 ${escapeHtml(props.recomendacion)}</div>`; }
+      if (props.clientes_afectados) { html += `<div class="popup-section"><div class="popup-label">👥 Clientes afectados</div><div class="popup-value">${props.clientes_afectados.toLocaleString()}</div></div>`; }
+      if (props.duracion_estimada_min) { html += `<div class="popup-section"><div class="popup-label">⏰ Duración estimada</div><div class="popup-value">${props.duracion_estimada_min} minutos</div></div>`; }
+      return html;
+    }
+    function crearPopupRuta(props) {
+      let html = `<div class="popup-header">📍 Segmento de ruta</div>`;
+      if (props.origen && props.destino) { html += `<div class="popup-section"><div class="popup-label">Tramo</div><div class="popup-value">${escapeHtml(props.origen)} → ${escapeHtml(props.destino)}</div></div>`; }
+      if (props.calle) { html += `<div class="popup-section"><div class="popup-label">Calle</div><div class="popup-value">${escapeHtml(props.calle)}</div></div>`; }
+      if (props.distancia_m) { html += `<div class="popup-section"><div class="popup-label">Distancia</div><div class="popup-value">${props.distancia_m} metros</div></div>`; }
+      return html;
+    }
+    function popupFor(feature, file){
+      const props = feature.properties || {};
+      if (file.includes('amenaza')) { return crearPopupAmenaza(props); } 
+      else if (file.includes('ruta')) { return crearPopupRuta(props); } 
+      else { return crearPopupOficina(props); }
+    }
+    function escapeHtml(s){ 
+      if (!s) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); 
+    }
+    function officesJsonToGeoJSON(arr){
+      return { type: 'FeatureCollection', features: (arr||[]).filter(o => typeof o.lon==='number' && typeof o.lat==='number').map(o => ({ type:'Feature', geometry:{ type:'Point', coordinates:[o.lon, o.lat] }, properties:o })) };
+    }
+    function actualizarStats() {
+      const statsDiv = document.getElementById('stats');
+      statsDiv.innerHTML = `<div><span class="label">Oficinas cargadas:</span> <span class="value">${statsData.oficinas}</span></div><div><span class="label">Amenazas activas:</span> <span class="value">${statsData.amenazas}</span></div><div><span class="label">Distancia ruta:</span> <span class="value">${statsData.rutaKm.toFixed(2)} km</span></div>`;
+    }
+    async function fetchJson(path){
+      const r = await fetch(path, { cache: 'no-store' });
+      if (!r.ok) throw new Error(`${path}: ${r.status}`);
+      return await r.json();
+    }
+    async function loadLayer(file, fallback){
+      try {
+        let path = `/data/${file}`;
+        let data = await fetchJson(path).catch(async e => { if (fallback){ path = `/data/${fallback}`; return await fetchJson(path); } throw e; });
+        if (Array.isArray(data)) data = officesJsonToGeoJSON(data);
+
+        if (file.includes('notario') || file.includes('sii')) { statsData.oficinas += data.features.length; } 
+        else if (file.includes('amenaza')) { statsData.amenazas += data.features.length; }
+        if (file.includes('ruta') && data.metadata && data.metadata.tramite) { statsData.rutaKm = data.metadata.tramite.distancia_total_km || 0; }
+
+        const layer = L.geoJSON(data, {
+          style: styleFn(file),
+          pointToLayer: pointToLayerFactory(file),
+          onEachFeature: (feat, lyr) => {
+            const props = feat.properties;
+            if (props && props.tipo === 'parada') {
+              let popupHtml = `<div class="popup-header">📍 Parada ${props.numero}: ${escapeHtml(props.nombre)}</div>`;
+              popupHtml += `<div class="popup-section"><div class="popup-label">Dirección</div><div class="popup-value">${escapeHtml(props.direccion)}</div></div>`;
+              popupHtml += `<div class="popup-section"><div class="popup-label">⏱️ Tiempo de trámite</div><div class="popup-value">${props.tiempo_tramite} minutos</div></div>`;
+              if (props.documentos && props.documentos.length > 0) {
+                popupHtml += `<div class="popup-section"><div class="popup-label">📄 Documentos requeridos</div><ul class="popup-list">`;
+                props.documentos.forEach(d => { popupHtml += `<li>${escapeHtml(d)}</li>`; });
+                popupHtml += `</ul></div>`;
+              }
+              lyr.bindPopup(popupHtml);
+            } else {
+              const html = popupFor(feat, file);
+              if (html) lyr.bindPopup(html);
+            }
+          }
+        });
+
+        layer.addTo(map);
+        activeLayers.set(file, layer);
+
+        if (file === 'ruta_dijkstra.geojson') {
+          layer.bringToFront(); 
+          map.fitBounds(layer.getBounds().pad(0.1));
+        }
+        
+        actualizarStats();
+
+      } catch (err){
+        console.error('Error cargando', file, err);
+        actualizarStats();
+      }
+    }
+    function unloadLayer(file){
+      const layer = activeLayers.get(file);
+      if (layer){
+        if (file.includes('notario') || file.includes('sii')) { statsData.oficinas -= layer.getLayers().length; } 
+        else if (file.includes('amenaza')) { statsData.amenazas -= layer.getLayers().length; }
+        map.removeLayer(layer);
+        activeLayers.delete(file);
+        actualizarStats();
+      }
+    }
+    document.querySelectorAll('.layer-toggle').forEach(cb => {
+      const file = cb.dataset.file;
+      const fallback = cb.dataset.fallback || '';
+      if (cb.checked) loadLayer(file, fallback);
+      cb.addEventListener('change', () => { cb.checked ? loadLayer(file, fallback) : unloadLayer(file); });
+    });
+    actualizarStats();
+  </script>
 </body>
 </html>
